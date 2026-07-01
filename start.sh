@@ -3,8 +3,8 @@
 echo "Worker Initiated"
 
 echo "Symlinking files from Network Volume"
-rm -rf /workspace && \
-  ln -s /runpod-volume /workspace
+ln -sf /runpod-volume/venv /workspace/venv
+ln -sf /runpod-volume/stable-diffusion-webui-forge /workspace/stable-diffusion-webui-forge
 
 echo "Docker image version: ${IMAGE_VERSION}"
 
@@ -15,6 +15,9 @@ if [ -f "/workspace/venv/bin/activate" ]; then
     export LD_PRELOAD="${TCMALLOC}"
     export PYTHONUNBUFFERED=true
     export HF_HOME="/workspace"
+    
+    mkdir -p /workspace/logs
+    
     python3 /workspace/stable-diffusion-webui-forge/webui.py \
       --xformers \
       --no-half-vae \
