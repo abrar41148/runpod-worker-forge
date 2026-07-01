@@ -3,6 +3,8 @@
 echo "Worker Initiated"
 
 echo "Symlinking files from Network Volume"
+mkdir -p /workspace
+
 ln -sf /runpod-volume/venv /workspace/venv
 ln -sf /runpod-volume/stable-diffusion-webui-forge /workspace/stable-diffusion-webui-forge
 
